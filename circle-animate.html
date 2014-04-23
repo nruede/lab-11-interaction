@@ -9,12 +9,13 @@
 document.addEventListener('DOMContentLoaded', main);
 var sketch;
 var context;
+var circle = {'x':0, 'y':100, 'r':25 };
+var dx = 1;
+var fps = 10;
 function main() {
 	sketch = document.getElementById('sketch');
 	context = sketch.getContext("2d");
-	sketch.addEventListener("click", function(event) {
-		draw_face(event.x, event.y);
-	});
+	setInterval(animate, fps);
 }
 function draw_circle(x, y, r) {
 	context.beginPath();
@@ -22,18 +23,14 @@ function draw_circle(x, y, r) {
 	context.closePath();
 	context.fill();
 }
-function draw_face(x,y){
-	context.fillStyle = "#009933";
-	draw_circle(x, y, 200);
-	context.fillStyle = "#000000"
-	context.fillRect(x-100,y+50,100,30);
-	context.fillStyle = "#FFFFFF"
-	draw_circle(x-120, y-50, 40);
-	draw_circle(x-20, y-50, 40);
-	context.fillStyle = "#000000"
-	draw_circle(x-140, y-50, 20);
-	draw_circle(x-40, y-50, 20);
+function animate() {
+	context.clearRect(0, 0, sketch.offsetWidth, sketch.offsetHeight);
+	draw_circle(circle.x, circle.y, circle.r);
+	circle.x = circle.x + dx;
 }
+
+
+
 
 </script>
 </body>
